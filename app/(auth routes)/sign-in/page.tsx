@@ -28,7 +28,10 @@ export default function SignInPage() {
       router.push("/profile");
     } catch (err) {
       if (isAxiosError(err)) {
-        setError(err.response?.data?.error ?? "Login failed");
+        const apiError = err.response?.data;
+        setError(
+          apiError?.response?.message ?? apiError?.error ?? "Login failed",
+        );
       } else {
         setError("Login failed");
       }
@@ -49,6 +52,7 @@ export default function SignInPage() {
             type="email"
             name="email"
             className={css.input}
+            autoComplete="email"
             required
           />
         </div>
@@ -60,6 +64,7 @@ export default function SignInPage() {
             type="password"
             name="password"
             className={css.input}
+            autoComplete="current-password"
             required
           />
         </div>

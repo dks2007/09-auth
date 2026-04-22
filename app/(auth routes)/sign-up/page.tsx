@@ -28,7 +28,12 @@ export default function SignUpPage() {
       router.push("/profile");
     } catch (err) {
       if (isAxiosError(err)) {
-        setError(err.response?.data?.error ?? "Registration failed");
+        const apiError = err.response?.data;
+        setError(
+          apiError?.response?.message ??
+            apiError?.error ??
+            "Registration failed",
+        );
       } else {
         setError("Registration failed");
       }
@@ -48,6 +53,7 @@ export default function SignUpPage() {
             type="email"
             name="email"
             className={css.input}
+            autoComplete="email"
             required
           />
         </div>
@@ -59,6 +65,7 @@ export default function SignUpPage() {
             type="password"
             name="password"
             className={css.input}
+            autoComplete="new-password"
             required
           />
         </div>
