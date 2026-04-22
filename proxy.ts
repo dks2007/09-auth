@@ -24,7 +24,7 @@ const resolveResponse = (request: NextRequest, isAuthenticated: boolean) => {
   }
 
   if (isAuthenticated && isAuthRoute(pathname)) {
-    return NextResponse.redirect(new URL("/profile", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();

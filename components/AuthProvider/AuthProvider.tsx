@@ -52,7 +52,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         setUser(me);
 
         if (isAuthRoute(pathname)) {
-          router.replace("/profile");
+          router.replace("/");
         }
       } catch {
         clearIsAuthenticated();
