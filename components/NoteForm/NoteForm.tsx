@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import type { CreateNoteRequest } from "../../types/note";
-import { createNote } from "../../lib/server-actions";
+import { createNote } from "@/lib/api/clientApi";
 import styles from "./NoteForm.module.css";
 import { useNoteStore } from "../../lib/store/noteStore";
 

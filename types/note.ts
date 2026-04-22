@@ -7,7 +7,7 @@ export interface Note {
   updatedAt: string;
 }
 
-export type NoteTag = 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 
 export interface CreateNoteRequest {
   title: string;
