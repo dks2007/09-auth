@@ -1,5 +1,5 @@
-import { cookies } from "next/headers";
 import { api } from "./api";
+import type { AxiosResponse } from "axios";
 import type { Note } from "@/types/note";
 import type { User } from "@/types/user";
 
@@ -12,7 +12,12 @@ interface SessionResponse {
   success: boolean;
 }
 
-const getCookieHeader = async () => {
+const getCookieHeader = async (cookieHeader?: string) => {
+  if (cookieHeader !== undefined) {
+    return { Cookie: cookieHeader };
+  }
+
+  const { cookies } = await import("next/headers");
   const cookieStore = await cookies();
   return { Cookie: cookieStore.toString() };
 };
@@ -54,8 +59,9 @@ export const getMe = async (): Promise<User> => {
   return response.data;
 };
 
-export const checkSession = async (): Promise<SessionResponse> => {
-  const headers = await getCookieHeader();
-  const response = await api.get<SessionResponse>("/auth/session", { headers });
-  return response.data;
+export const checkSession = async (
+  cookieHeader?: string,
+): Promise<AxiosResponse<SessionResponse>> => {
+  const headers = await getCookieHeader(cookieHeader);
+  return api.get<SessionResponse>("/auth/session", { headers });
 };
